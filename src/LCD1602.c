@@ -58,7 +58,7 @@ void delay(unsigned int t)
 
 void write_len0_char(unsigned char *p){
     static unsigned char len0_index = 0;
-    if(len0_index==17){
+    if(len0_index==16){
         Set_xy_LCM(0,0);
         WriteString("                ");
         len0_index=0;
@@ -70,7 +70,7 @@ void write_len0_char(unsigned char *p){
 
 void write_len1_char(unsigned char p){
     static unsigned char len1_index = 0;
-    if(len1_index==17){
+    if(len1_index==16){
         Set_xy_LCM(1,0);
         WriteString("                ");
         len1_index=0;
