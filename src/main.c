@@ -1,6 +1,7 @@
-#include <stc12c5a.h>
+#include <STC12C5A.h>
 #include <intrins.h>
 #include "LCD1602.h"
+#include "Buzzer.h"
 
 void Timer0Init(void);
 unsigned char morse_to_char();
@@ -43,6 +44,7 @@ unsigned int key_speed=800;         // 手速定义, 一个. 按下的时间0~1500之间,单位
 
 void main(){
     unsigned char press_flag = 0;
+		RingInit();//蜂鸣器
     init_LCD1602();
     Timer0Init();
     UartInit();
@@ -51,13 +53,16 @@ void main(){
         if(key==0){
             Delay10ms();
             if(key==0){
-                TR0 = 0;  // 停止计时
-                unpress_counter = counter;
+                TR0 = 0; //停止计时
+								TR1 = 0;
+								unpress_counter = counter;
                 counter = 0;
                 press_flag = 1;
-                TR0 = 1;  // 启动计时
+                TR0 = 1;  //启动计时
+								TR1 = 1;
                 while(!key);
                 TR0 = 0;  // 停止计时
+								TR1 = 0;
                 press_counter = counter;
                 counter = 0;
                 TR0 = 1;  // 启动计时
